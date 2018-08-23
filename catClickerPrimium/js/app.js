@@ -35,12 +35,12 @@ var octupus = {
         var allButton = $('button');
         for(e in data.objArr){
             console.log(allButton[e]);
-            allButton[e].addEventListener("click", function(){
-               console.log(`${data.objArr[e]} was clicked.`);
-                data.objArr[e].clicks+=1;
-                var cat = data.objArr[e];
-                view.disp(cat);
-            });
+            allButton[e].addEventListener("click", (function(copy){
+               console.log(`${copy} was clicked.`);
+                return function(){copy.clicks+=1;
+                var cat = copy;
+                view.disp(cat);};
+            })(data.objArr[e]));
         };
     },
 };
@@ -52,6 +52,7 @@ var view = {
         $('#cat').html('');
         $('#cat').append(image);
         var clicks = `<h1>you  have clicked this cat ${cat.clicks} times!!</h1>`;
+        $('#number').html('');
         $('#number').append(clicks);
     },
     buttons: function(){
