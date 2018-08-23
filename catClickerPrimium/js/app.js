@@ -22,7 +22,11 @@ var octupus = {
             var url = data.imgArr[e];
             var obj = new data.cat(name, url, 0);
             data.objArr.push(obj);
-            var button = `<button type="buttton" id="button${e}">button ${e}</button>`;
+            var buton = $(document.createElement('button'));
+           // buton.attr('id', `button${e}`);
+            //buton.attr('type', 'button');
+            //buton.text(`button ${e}`);
+            var button = `<button type="button" id="button${e}">button ${e}</button>`;
             data.button.push(button);
         }
         view.buttons();
@@ -30,9 +34,9 @@ var octupus = {
     buttons: function(){
         var allButton = $('button');
         for(e in data.objArr){
-            console.log(typeof(allButton[e]));
-            allButton[e].click(function(){
-                console.log(`${data.objArr[e]} was clicked.`)
+            console.log(allButton[e]);
+            allButton[e].addEventListener("click", function(){
+               console.log(`${data.objArr[e]} was clicked.`);
                 data.objArr[e].clicks+=1;
                 var cat = data.objArr[e];
                 view.disp(cat);
@@ -45,6 +49,7 @@ var view = {
 
     disp: function(cat){
         var image = `<img src=${cat.img} class="image"/>`;
+        $('#cat').html('');
         $('#cat').append(image);
         var clicks = `<h1>you  have clicked this cat ${cat.clicks} times!!</h1>`;
         $('#number').append(clicks);
