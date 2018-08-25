@@ -52,13 +52,27 @@ var octupus = {
         sub[0].addEventListener("click", function(){
             var name = ('#catname')[0].text();
             var flag =0;
+            var index = 0;
             for(e in data.nameArr){
-                if()
+                if(name == nameArr[e])
+                    {
+                        flag=1;
+                        index = e;
+                        break;
+                    }
+            }
+            if(flag==1){
+
+            }else{
+                var present = $('#cat');
+
+                data.nameArr
             }
         });
         var res = $('#reset');
         res[0].addEventListener("click", function(){
             data.button=[];
+            data.objArr=[];
             octupus.create();
         });
     },
