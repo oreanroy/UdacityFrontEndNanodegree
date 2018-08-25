@@ -23,25 +23,44 @@ var octupus = {
             var obj = new data.cat(name, url, 0);
             data.objArr.push(obj);
             var buton = $(document.createElement('button'));
-           // buton.attr('id', `button${e}`);
-            //buton.attr('type', 'button');
-            //buton.text(`button ${e}`);
             var button = `<button type="button" id="button${e}">button ${e}</button>`;
             data.button.push(button);
         }
+        
         view.buttons();
     },
     buttons: function(){
         var allButton = $('button');
-        for(e in data.objArr){
-            console.log(allButton[e]);
+        for(e in data.button){
             allButton[e].addEventListener("click", (function(copy){
-               console.log(`${copy} was clicked.`);
                 return function(){copy.clicks+=1;
                 var cat = copy;
                 view.disp(cat);};
             })(data.objArr[e]));
         };
+    },
+    admin: function(){
+        var admn = $('#activate');
+        console.log(admn[0]);
+        admn[0].addEventListener("click", function(){
+            view.form();
+        });
+    },
+    submit: function(){
+        var sub = $('#sumit');
+        console.log(sub);
+        sub[0].addEventListener("click", function(){
+            var name = ('#catname')[0].text();
+            var flag =0;
+            for(e in data.nameArr){
+                if()
+            }
+        });
+        var res = $('#reset');
+        res[0].addEventListener("click", function(){
+            data.button=[];
+            octupus.create();
+        });
     },
 };
 
@@ -56,15 +75,27 @@ var view = {
         $('#number').append(clicks);
     },
     buttons: function(){
+        var but = $('#buttons');
+        but.html('');
         for(e in data.button){
-            var but = $('#buttons');
             but.append(data.button[e]);
         };
     octupus.buttons();
+    },
+    form: function(){
+        var form = $('#admin');
+        var add = `<form id="form"> Name: <br>
+                  <input id="catname" type="text" name="catname"><br>
+                  <button type="button" id="submit">Submit</button>
+                  <button type="button" id="reset">Reset</button>
+                  </form>`;
+        form.append(add);
+        octupus.submit();
     },
 };
 var attach = $('#cat');
 var image1 = `<img src=${data.imgArr[0]} class="image"/>`;
 attach.append(image1);
 octupus.create();
+octupus.admin();
 }());
